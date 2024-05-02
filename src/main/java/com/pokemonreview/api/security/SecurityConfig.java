@@ -32,13 +32,13 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .exceptionHandling()
-                .authenticationEntryPoint(authEntryPoint)
+//                .authenticationEntryPoint(authEntryPoint)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
