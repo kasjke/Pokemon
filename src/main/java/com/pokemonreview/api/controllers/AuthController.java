@@ -48,6 +48,12 @@ public class AuthController {
 //                loginDto.getPassword()));
 //        SecurityContextHolder.getContext().setAuthentication(authentication);
 //        String token = jwtGenerator.generateToken(authentication);
+        UserEntity user = userRepository.findByUsername(loginDto.getUsername()).orElse(null);
+
+        if(user == null || !passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
